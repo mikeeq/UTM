@@ -31,7 +31,7 @@ If you want to build the dependencies yourself, it is highly recommended that yo
     ```
     
     ```sh
-    pip3 install six pyparsing
+    pip3 install --break-system-packages six pyparsing setuptools pyyaml distlib mako
     ```
     
     Make sure to add `bison` to your `$PATH` environment variable!

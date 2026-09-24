@@ -60,6 +60,10 @@ struct VMConfigDisplayView: View {
                         Text("Retina Mode")
                     })
                 }
+                
+                DetailedSection("Custom Options", description: "Comma-separated properties appended to the display device argument, e.g. xres=3024,yres=1964") {
+                    DefaultTextField("Device Options", text: $config.customOptions.bound, prompt: "xres=3024,yres=1964")
+                }
             }
         }.disableAutocorrection(true)
     }

@@ -295,6 +295,9 @@ import Virtualization // for getting network interfaces
                         }
                         "neptune=true"
                     }
+                    if let customOptions = display.customOptions?.trimmingCharacters(in: CharacterSet(charactersIn: ", ").union(.whitespacesAndNewlines)), !customOptions.isEmpty {
+                        customOptions
+                    }
                     f()
                 }
             }

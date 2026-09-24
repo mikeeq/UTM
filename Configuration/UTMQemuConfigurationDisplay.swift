@@ -41,6 +41,9 @@ struct UTMQemuConfigurationDisplay: Codable, Identifiable {
     /// If true, use the true (retina) resolution of the display. Otherwise, use the percieved resolution.
     var isNativeResolution: Bool = false
     
+    /// Extra comma-separated properties appended to the display `-device` argument (e.g. `xres=3024,yres=1964`).
+    var customOptions: String?
+    
     let id = UUID()
     
     enum CodingKeys: String, CodingKey {
@@ -50,6 +53,7 @@ struct UTMQemuConfigurationDisplay: Codable, Identifiable {
         case upscalingFilter = "UpscalingFilter"
         case downscalingFilter = "DownscalingFilter"
         case isNativeResolution = "NativeResolution"
+        case customOptions = "CustomOptions"
     }
     
     init() {
@@ -63,6 +67,7 @@ struct UTMQemuConfigurationDisplay: Codable, Identifiable {
         upscalingFilter = try values.decode(QEMUScaler.self, forKey: .upscalingFilter)
         downscalingFilter = try values.decode(QEMUScaler.self, forKey: .downscalingFilter)
         isNativeResolution = try values.decode(Bool.self, forKey: .isNativeResolution)
+        customOptions = try values.decodeIfPresent(String.self, forKey: .customOptions)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -73,6 +78,7 @@ struct UTMQemuConfigurationDisplay: Codable, Identifiable {
         try container.encode(upscalingFilter, forKey: .upscalingFilter)
         try container.encode(downscalingFilter, forKey: .downscalingFilter)
         try container.encode(isNativeResolution, forKey: .isNativeResolution)
+        try container.encodeIfPresent(customOptions, forKey: .customOptions)
     }
 }
 
